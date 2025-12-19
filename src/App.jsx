@@ -7,8 +7,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/day" />} />
-        <Route path="/day" element={<DAY />} />
+        <Route path="/" element={<DAY />} />
       </Routes>
     </>
   )
