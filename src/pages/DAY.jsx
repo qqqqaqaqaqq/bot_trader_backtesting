@@ -76,7 +76,7 @@ export default function DAY() {
         if (!val) return "";
         const parts = val.split(/[-\s]/);
         if (parts.length < 3) return val;  
-        const [year, month, day] = parts;
+        const [_year, month, day] = parts;
         return `${month}월${day}일`;
       },
       style: { fontSize: '0.8em', color: 'var(--text-color)' }
