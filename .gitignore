@@ -1,0 +1,44 @@
+# 빌드 결과물
+bin/
+obj/
+*.exe
+*.dll
+
+# 로그 파일
+*.log
+
+# 환경설정 파일
+.env
+*.config
+
+# OS별 임시 파일
+.DS_Store
+Thumbs.db
+
+# IDE 관련
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+.vite/deps
+
+
+node_modules/**
+
+# 빌드 결과물
+dist/
+build/
+
+# 환경설정
+.env
+
+# IDE 관련
+.vscode/
+
+node_modules/
+__pycache__/
+myenv311/
+myenv312/
+myenv313/
