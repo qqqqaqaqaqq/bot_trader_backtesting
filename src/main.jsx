@@ -10,7 +10,7 @@ const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <GoogleOAuthProvider clientId={CLIENT_ID}>
-      <HashRouter basename="/bot_trader_backtesting">
+      <HashRouter>
         <App />
       </HashRouter>
     </GoogleOAuthProvider>
