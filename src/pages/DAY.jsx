@@ -38,9 +38,9 @@ export default function DAY() {
     chart: { 
       type: 'line', 
       height: 500, 
-      zoom: { enabled: false }, 
-      toolbar: { show: false }, 
-      animations: { enabled: false } 
+      zoom: { enabled: true }, 
+      toolbar: { show: true }, 
+      animations: { enabled: true } 
     },
     colors: ["#9467bd", "#8c564b", "#c244ab"],
   xaxis: { 
