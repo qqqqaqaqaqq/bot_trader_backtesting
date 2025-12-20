@@ -33,18 +33,6 @@ export default function DAY() {
     { name: "GPT + Strategy_B", data: Wallet_Strategy_2 }
   ];
 
-
-  
-
-
-  // 랭킹 계산
-  const ranking = series
-    .map(item => ({
-      name: item.name,
-      value: item.data[item.data.length - 1]
-    }))
-    .sort((a, b) => b.value - a.value);
-
   // 메인 차트 옵션
   const mainOptions = {
     chart: { 
