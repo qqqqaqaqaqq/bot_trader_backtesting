@@ -33,6 +33,7 @@ export default function DAY() {
     { name: "GPT + Strategy_B", data: Wallet_Strategy_2 }
   ];
 
+  
   // 메인 차트 옵션
   const mainOptions = {
     chart: { 
@@ -69,7 +70,35 @@ export default function DAY() {
       decimalsInFloat: 2 },
     stroke: { curve: 'straight', width: 2 },
     legend: { position: 'top' },
-    tooltip: { shared: true, intersect: false }
+    tooltip: {
+      shared: true,
+      intersect: false,
+      custom: function({ series, seriesIndex, dataPointIndex, w }) {
+        return `
+          <div style="
+            background: #fff; 
+            color: black; 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            font-size: 0.85em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+          ">
+            <div style="font-weight: bold; margin-bottom: 4px;">
+              ${Day[dataPointIndex]}  
+            </div>
+            ${w.globals.seriesNames.map((name, i) => {
+              if (!series[i] || series[i][dataPointIndex] === undefined) return '';
+              return `
+                <div style="display:flex; justify-content: space-between; gap:10px; margin:2px 0;">
+                  <span style="color: ${w.globals.colors[i]}">${name}</span>
+                  <span>${series[i][dataPointIndex].toFixed(2)} %</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+    }
   };
 
 
@@ -81,30 +110,14 @@ export default function DAY() {
       {/* Body */}
       <div className="container">
         <div className="chart">
-          <Chart options={mainOptions} series={series} type="line" height="100%" />
-                 
+        <Chart
+          options={mainOptions}
+          series={series}
+          type="line"
+          height="100%"
+        />
         </div>
       </div>
-
-    <div className="StrategyCard">
-      <h3>Wallet_Strategy_1</h3>
-      <div className="StrategyContent">
-        {PROMPT_1.split("\n").map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
-      </div>
-  
-    </div>
-
-    <div className="StrategyCard">
-      <h3>Wallet_Strategy_2</h3>
-      <div className="StrategyContent">
-        {PROMPT_2.split("\n").map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
-      </div>      
-    </div>
-
     </div>
   );
 }
