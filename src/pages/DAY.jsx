@@ -3,15 +3,8 @@ import Chart from "react-apexcharts";
 
 import { Day } from './DAY/Day';
 import { Wallet } from './DAY/Wallet';
-import { BTC } from './DAY/BTC';
-import { ETH } from './DAY/ETH';
-import { SOL } from './DAY/SOL';
-import { XRP } from './DAY/XRP';
-import { BCH } from './DAY/BCH';
 import { Wallet_Strategy_1 } from './DAY/Wallet_Strategy_1';
 import { Wallet_Strategy_2 } from "./DAY/Wallet_Strategy_2";
-
-
 
 import './styles/DAY.css';
 
@@ -35,14 +28,9 @@ const PROMPT_2 = `확실한 상승 신호일때만 매수 진행해줘.
 export default function DAY() {
 
   const series = [
-    { name: "Wallet", data: Wallet },
-    { name: "BTC", data: BTC },
-    { name: "ETH", data: ETH },
-    { name: "SOL", data: SOL },
-    { name: "XRP", data: XRP },
-    { name: "BCH", data: BCH },
-    { name: "Wallet_Strategy_1", data: Wallet_Strategy_1 },
-    { name: "Wallet_Strategy_2", data: Wallet_Strategy_2 }
+    { name: "GPT", data: Wallet },
+    { name: "GPT + Strategy_A", data: Wallet_Strategy_1 },
+    { name: "GPT + Strategy_B", data: Wallet_Strategy_2 }
   ];
 
 
@@ -66,7 +54,7 @@ export default function DAY() {
       toolbar: { show: false }, 
       animations: { enabled: false } 
     },
-    colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#c244ab"],
+    colors: ["#9467bd", "#8c564b", "#c244ab"],
   xaxis: { 
     categories: Day,
     tickAmount: 10,
@@ -104,20 +92,9 @@ export default function DAY() {
 
       {/* Body */}
       <div className="container">
-
         <div className="chart">
           <Chart options={mainOptions} series={series} type="line" height="100%" />
                  
-        </div>
-
-        <div className="Rank">
-          {ranking.map((item, index) => (
-            <div key={item.name} className="rank-card">
-              <div>{index + 1}위</div>
-              <div>Ticker : {item.name}</div>
-              <div>{item.value.toFixed(2)} %</div>
-            </div>
-          ))}
         </div>
       </div>
 
