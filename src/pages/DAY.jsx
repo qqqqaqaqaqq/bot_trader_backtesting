@@ -73,7 +73,7 @@ export default function DAY() {
     tooltip: {
       shared: true,
       intersect: false,
-      custom: function({ series, seriesIndex, dataPointIndex, w }) {
+      custom: function({ series, dataPointIndex, w }) {
         return `
           <div style="
             background: #fff; 
