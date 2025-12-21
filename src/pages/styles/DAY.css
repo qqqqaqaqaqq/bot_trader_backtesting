@@ -64,3 +64,76 @@
   line-height: 1.5;
   color: var(--text-color);
 }
+
+.strategy-cards {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--card-bg, #f9f9f9);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+
+.card p {
+  font-size: 1.0em;
+  line-height: 1.4em;
+  white-space: pre-wrap;
+  overflow: hidden;
+
+  /* 말줄임 처리 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* WebKit 기반 브라우저 */
+  
+  display: box;           /* 표준 속성 (호환성 보조) */
+  box-orient: vertical;
+  line-clamp: 5;          /* 표준 속성 */
+  
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 32px;
+  max-width: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative;
+  font-size: 1.1em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  line-height: 1.6;
+}

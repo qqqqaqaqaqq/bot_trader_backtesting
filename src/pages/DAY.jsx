@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 import { Day } from './DAY/Day';
@@ -9,14 +9,14 @@ import { Gemini_2_5_pro } from './DAY/Gemini_2_5_pro';
 
 import './styles/DAY.css';
 
-const PROMPT_1 = `확실한 상승 신호일때만 매수 진행해줘.
+const GPT_5_mini_Strategy_A = `확실한 상승 신호일때만 매수 진행해줘.
 단기 상승 판단을 하더라도 위험성이 존재하므로 매수 금지 해줘.
 너무 많은 거래는 자제해줘
 손실이 5% 이상일 경우 부분 매도해줘. 로스컷의 양은 너가 정해줘.
 수익이 5% 이상일 경우 부분 매도해줘. 이익실현의 양은 너가 정해줘.
 거래량을 중요하게 봐줘`;
 
-const PROMPT_2 = `확실한 상승 신호일때만 매수 진행해줘.
+const GPT_5_mini_Strategy_B = `확실한 상승 신호일때만 매수 진행해줘.
 단기 상승 판단을 하더라도 위험성이 존재하므로 매수 금지 해줘.
 너무 많은 거래는 자제해줘
 손실이 5% 이상일 경우 부분 매도해줘. 로스컷의 양은 너가 정해줘.
@@ -25,8 +25,8 @@ const PROMPT_2 = `확실한 상승 신호일때만 매수 진행해줘.
 홀드 하는것도 하나의 중요한 전략이라 나는 생각해
 거래량을 중요하게 봐줘`;
 
-
 export default function DAY() {
+  const [modalContent, setModalContent] = useState(null);
 
   const series = [
     { name: "GPT-5-mini", data: GPT_5_mini },
@@ -35,7 +35,14 @@ export default function DAY() {
     { name: "Gemini_2_5_pro", data: Gemini_2_5_pro },    
   ];
 
-  
+  const strategies = [
+    { name: "GPT-5-mini + Strategy_A", prompt: GPT_5_mini_Strategy_A },
+    { name: "GPT-5-mini + Strategy_B", prompt: GPT_5_mini_Strategy_B },
+  ];
+
+  const openModal = (content) => setModalContent(content);
+  const closeModal = () => setModalContent(null);
+
   // 메인 차트 옵션
   const mainOptions = {
     chart: { 
@@ -45,30 +52,30 @@ export default function DAY() {
       toolbar: { show: true }, 
       animations: { enabled: true } 
     },
-  xaxis: { 
-    categories: Day,
-    tickAmount: 10,
-    labels: {
-      rotate: 0,
-      formatter: function(val) {
-        if (!val) return "";
-        const parts = val.split(/[-\s]/);
-        if (parts.length < 3) return val;  
-        const [_year, month, day] = parts;
-        return `${month}월${day}일`;
-      },
-      style: { fontSize: '0.8em', color: 'var(--text-color)' }
-    }
-  },
+    xaxis: { 
+      categories: Day,
+      tickAmount: 10,
+      labels: {
+        rotate: 0,
+        formatter: function(val) {
+          if (!val) return "";
+          const parts = val.split(/[-\s]/);
+          if (parts.length < 3) return val;  
+          const [_year, month, day] = parts;
+          return `${month}월${day}일`;
+        },
+        style: { fontSize: '0.8em', color: 'var(--text-color)' }
+      }
+    },
     yaxis: { 
       title: { text: "Percent",
         style : {
           fontSize : "1en",
           color:"var(--text-color)"
         }
-
-       },
-      decimalsInFloat: 2 },
+      },
+      decimalsInFloat: 2
+    },
     stroke: { curve: 'smooth', width: 2 },
     legend: {
       position: 'right',
@@ -107,23 +114,39 @@ export default function DAY() {
     }
   };
 
-
   return (
     <div className="chart-container">
-      {/* Header */}
       <h2>기간 2025-01-01 00:00:00 ~ 2025-08-10 00:00:00 UTC</h2>
 
-      {/* Body */}
       <div className="container">
         <div className="chart">
-        <Chart
-          options={mainOptions}
-          series={series}
-          type="line"
-          height="100%"
-        />
+          <Chart
+            options={mainOptions}
+            series={series}
+            type="line"
+            height="100%"
+          />
         </div>
       </div>
+
+      {/* 전략 카드 */}
+      <div className="strategy-cards">
+        {strategies.map((s, idx) => (
+          <div className="card" key={idx}>
+            <h3>{s.name}</h3>
+            <p onClick={() => openModal(s.prompt)}>{s.prompt}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* 모달 */}
+      {modalContent && (
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <pre>{modalContent}</pre>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
