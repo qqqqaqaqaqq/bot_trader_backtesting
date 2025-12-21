@@ -2,9 +2,10 @@
 import Chart from "react-apexcharts";
 
 import { Day } from './DAY/Day';
-import { Wallet } from './DAY/Wallet';
-import { Wallet_Strategy_1 } from './DAY/Wallet_Strategy_1';
-import { Wallet_Strategy_2 } from "./DAY/Wallet_Strategy_2";
+import { GPT_5_mini } from './DAY/GPT_5_mini';
+import { GPT_5_mini_Strategy_1 } from './DAY/GPT_5_mini_Strategy_1';
+import { GPT_5_mini_Strategy_2 } from "./DAY/GPT_5_mini_Strategy_2";
+import { Gemini_2_5_pro } from './DAY/Gemini_2_5_pro';
 
 import './styles/DAY.css';
 
@@ -28,9 +29,10 @@ const PROMPT_2 = `확실한 상승 신호일때만 매수 진행해줘.
 export default function DAY() {
 
   const series = [
-    { name: "GPT", data: Wallet },
-    { name: "GPT + Strategy_A", data: Wallet_Strategy_1 },
-    { name: "GPT + Strategy_B", data: Wallet_Strategy_2 }
+    { name: "GPT-5-mini", data: GPT_5_mini },
+    { name: "GPT-5-mini + Strategy_A", data: GPT_5_mini_Strategy_1 },
+    { name: "GPT-5-mini + Strategy_B", data: GPT_5_mini_Strategy_2 },
+    { name: "Gemini_2_5_pro", data: Gemini_2_5_pro },    
   ];
 
   
@@ -43,7 +45,6 @@ export default function DAY() {
       toolbar: { show: true }, 
       animations: { enabled: true } 
     },
-    colors: ["#9467bd", "#8c564b", "#c244ab"],
   xaxis: { 
     categories: Day,
     tickAmount: 10,
@@ -68,8 +69,13 @@ export default function DAY() {
 
        },
       decimalsInFloat: 2 },
-    stroke: { curve: 'straight', width: 2 },
-    legend: { position: 'top' },
+    stroke: { curve: 'smooth', width: 2 },
+    legend: {
+      position: 'right',
+      floating: false,    
+      offsetY: 0,
+      offsetX: 0
+    },
     tooltip: {
       shared: true,
       intersect: false,

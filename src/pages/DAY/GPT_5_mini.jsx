@@ -1,4 +1,4 @@
-﻿export const Wallet =
+﻿export const GPT_5_mini =
 [
 0.00, 
 3.79 ,

@@ -1,4 +1,4 @@
-﻿export const Wallet_Strategy_2 =[
+﻿export const GPT_5_mini_Strategy_2 =[
 0.00,
 0.00 ,
 0.23 ,
