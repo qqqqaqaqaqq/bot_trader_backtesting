@@ -9,21 +9,21 @@ import { Gemini_2_5_pro } from './DAY/Gemini_2_5_pro';
 
 import './styles/DAY.css';
 
-const GPT_5_mini_Strategy_A = `확실한 상승 신호일때만 매수 진행해줘.
-단기 상승 판단을 하더라도 위험성이 존재하므로 매수 금지 해줘.
-너무 많은 거래는 자제해줘
-손실이 5% 이상일 경우 부분 매도해줘. 로스컷의 양은 너가 정해줘.
-수익이 5% 이상일 경우 부분 매도해줘. 이익실현의 양은 너가 정해줘.
-거래량을 중요하게 봐줘`;
+const GPT_5_mini_Strategy_A = `Only proceed with buying when there is a clear bullish signal.
+Even if there is a short-term upward trend, do not buy due to potential risks.
+Avoid making too many trades.
+If a loss exceeds 5%, partially sell — you can decide the amount for the stop-loss.
+If a profit exceeds 5%, partially sell — you can decide the amount for taking profit.
+Pay close attention to trading volume.`;
 
-const GPT_5_mini_Strategy_B = `확실한 상승 신호일때만 매수 진행해줘.
-단기 상승 판단을 하더라도 위험성이 존재하므로 매수 금지 해줘.
-너무 많은 거래는 자제해줘
-손실이 5% 이상일 경우 부분 매도해줘. 로스컷의 양은 너가 정해줘.
-수익 시 너의 판단하에 결정해줘
-확실한 하락장이라고 판단되는 경우 손절 후 홀딩 해줘.
-홀드 하는것도 하나의 중요한 전략이라 나는 생각해
-거래량을 중요하게 봐줘`;
+const GPT_5_mini_Strategy_B = `Only proceed with buying when there is a clear bullish signal.
+Even if there appears to be a short-term upward trend, do not buy due to potential risks.
+Avoid making too many trades.
+If a loss exceeds 5%, partially sell — you can decide the amount for the stop-loss.
+For profits, decide based on your judgment.
+If it is judged to be a clear downtrend, cut losses and hold.
+I believe that holding can also be an important strategy.
+Pay close attention to trading volume.`;
 
 export default function DAY() {
   const [modalContent, setModalContent] = useState(null);
