@@ -131,7 +131,7 @@ export default function DAY() {
     tooltip: {
       shared: true,
       intersect: false,
-      custom: function({ series, seriesIndex, dataPointIndex, w }) {
+      custom: function({ series, dataPointIndex, w }) {
         const label = w.globals.labels[dataPointIndex] || '';
         let tooltipHtml = `<div style="
           background: transparent; 
