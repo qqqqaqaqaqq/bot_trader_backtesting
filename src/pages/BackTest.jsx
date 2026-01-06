@@ -54,7 +54,8 @@ export default function BacktestingResult({ backtestResult }) {
       };
     });
 
-    setSeries(newSeries);
+    // 비동기적으로 setState 호출
+    Promise.resolve().then(() => setSeries(newSeries));
   }, [backtestResult]);
 
   return (
