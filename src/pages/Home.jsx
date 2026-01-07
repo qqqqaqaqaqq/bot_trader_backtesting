@@ -7,6 +7,7 @@ import BCHPredChart from './pred/BCHPredChart'
 import './styles/home.css'
 import { fetchBTCCloseData } from './Upbit'
 import { createClient } from "@supabase/supabase-js";
+import PromptCards from './PromptCard'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -30,6 +31,40 @@ const MINI_COLLECTIONS = [
   "gpt_5_0_mini_st2",  
   "gpt_5_0_mini_st3",  
 ];
+
+const Prompt = {
+  ST_1:`1. 장기적인 상승 추세가 명확할 때만 매수한다.
+2. 손실이 -3%에 도달하면 일부 물량을 손절한다.
+3. 수익이 +5%~+10% 구간에 도달하면 분할 매도한다.
+4. LSTM 예측 주가는 참고 자료로만 활용하고, 과도하게 의존하지 않는다.
+5. 초단기 매매(단타)는 지양하고, 중·장기 관점에서 매매한다.
+`,
+    ST_2: `1. 장기적인 상승 추세가 명확할 때 매매한다.
+2. 손실이 -3%에 도달하면 일부 물량을 손절한다.
+3. LSTM 예측 + 너의 판단의 결과 추가 하락 판단 시 -3%에 도달하지 않더라도 과감하게 손절한다.
+4. 수익이 +5%~+10% 구간에 도달하면 분할 매도한다.
+5. 수익이 발생 하더라도 LSTM 예측 + 너의 판단의 결과 조정 판단 시 수익 구간에 도달하지 않아도 일정 부분 익절 한다.
+6. LSTM 예측 주가는 참고 자료이며, 과도하게 의존하지 않는다.
+7. 초단기 매매(단타)는 지양하고, 중·장기 관점으로 먼저 판단한다.
+8. 그러나 단기 상승 신호 발생 하였고 동시에 LSTM 예측 신호 + 너의 관점이 일치 할 경우에 매매를 허락한다.`,
+ST_3:`
+# 해당 프롬프트는 티커 별 각각 적용 되는 전략이다.
+------매도 전략------
+- 손실
+1. 손실이 -3%에 도달하면 일정 물량(AMOUT 0~100%)을 손절한다. 
+- 수익
+1. 수익이 +5%~+10% 구간에 도달하면 일정 물량(AMOUT 0~100%)을 매도한다.
+- 공통
+1. LSTM 예측과 지표를 통한 너의 판단단 결과가 큰 폭의 하락을 동시에 예상 할 경우 -3%에 도달하지 않더라도 일정 물량(AMOUNT 0~100%)을 손절한다.
+2. 단기 상승 신호 포착 시 LSTM 예측 신호와 너의 관점이 일치 할 경우에 매매를 허락한다. 
+3. 장기 상승 판단 시 LSTM보다 너의 판단을 우선 한다.
+4. 과도한 단일 종목 집중 투자를 금지한다.
+
+------추가 사항------
+1. LSTM 예측 주가를 과도하게 의존하지 않는다.
+2. 투자 마감 시간은 2025년 7월 31일이다.
+`
+}
 
 // Supabase LSTM fetch 공통 함수
 async function fetchAllPredictions(coin) {
@@ -163,10 +198,11 @@ export default function Home() {
   return (
     <div className="home-frame">
       <BackTest backtestResult={backtestResult}/>
-      {/* <BTCPredChart series={series.BTC} DATA={closeData.BTC}/> */}
-      {/* <ETHPredChart series={series.ETH} DATA={closeData.ETH}/>
+      {/* <BTCPredChart series={series.BTC} DATA={closeData.BTC}/>
+      <ETHPredChart series={series.ETH} DATA={closeData.ETH}/>
       <XRPPredChart series={series.XRP} DATA={closeData.XRP}/>
       <BCHPredChart series={series.BCH} DATA={closeData.BCH}/> */}
+      <PromptCards prompts={Prompt} />
     </div>
   );
 }

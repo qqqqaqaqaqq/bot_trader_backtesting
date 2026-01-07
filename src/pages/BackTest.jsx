@@ -1,6 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import './styles/chart.css'
+import './PromptCard'
 
 export default function BacktestingResult({ backtestResult }) {
   const [series, setSeries] = useState([]);
