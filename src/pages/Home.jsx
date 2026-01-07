@@ -164,8 +164,8 @@ async function fetchCloseData(symbol) {
 
 export default function Home() {
   const [backtestResult, setBacktestResult] = useState({});
-  const [series, setSeries] = useState({ BTC: [], ETH: [], XRP: [], BCH: [] });
-  const [closeData, setCloseData] = useState({ BTC: [], ETH: [], XRP: [], BCH: [] });
+  const [_series, setSeries] = useState({ BTC: [], ETH: [], XRP: [], BCH: [] });
+  const [_closeData, setCloseData] = useState({ BTC: [], ETH: [], XRP: [], BCH: [] });
 
   useEffect(() => { 
     fetchBacktest().then((data) => {
