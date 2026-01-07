@@ -163,7 +163,7 @@ export default function Home() {
   return (
     <div className="home-frame">
       <BackTest backtestResult={backtestResult}/>
-      <BTCPredChart series={series.BTC} DATA={closeData.BTC}/>
+      {/* <BTCPredChart series={series.BTC} DATA={closeData.BTC}/> */}
       {/* <ETHPredChart series={series.ETH} DATA={closeData.ETH}/>
       <XRPPredChart series={series.XRP} DATA={closeData.XRP}/>
       <BCHPredChart series={series.BCH} DATA={closeData.BCH}/> */}
